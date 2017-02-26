@@ -10,6 +10,7 @@ function Dinosaur.create(opts)
     newDino.screen = opts.screen
     newDino.x = opts.x
     newDino.y = opts.y
+    newDino.ground = opts.y
     newDino.states = {
         running = 1,
         jumping = 2,
@@ -39,8 +40,9 @@ end
 
 function Dinosaur:update(dt)
     local jumpSpeed = 30
-    local jumpMaxHeight = 250
     local gravity = -15
+    local ground = self.screen.h - 275
+    local jumpMaxHeight = ground - jumpSpeed * 5.5
 
     self.run:update(dt)
 
@@ -60,7 +62,7 @@ function Dinosaur:update(dt)
     end
 
     -- Fall if we're not on the ground
-    if self.y < self.screen.h - 80 then
+    if self.y < self.ground then
         self.y = self.y - gravity
 
         if not self:isJumping() then
