@@ -32,7 +32,7 @@ function love.load()
     math.randomseed(os.time())
 
     -- Instantiate the the road and dinosaur
-    ground = Ground.create{ 
+    ground = Ground.create{
         screen = screen,
         speed = 300,
         y = 250
@@ -52,7 +52,7 @@ function love.load()
         cacti[i] = Cactus.create{
             screen = screen,
             speed = 300,
-            x = math.random(0, screen.w * 2),
+            x = math.random(screen.w, screen.w * 2),
             y = 200,
         }
     end
@@ -66,11 +66,15 @@ function love.update(dt)
 
     for _, cactus in ipairs(cacti) do
         cactus:update(dt)
+        if cactus:isTouching(dino) then
+            print("Touching!")
+        else
+            print("Miss")
+        end
     end
 
     ground:update(dt)
     dino:update(dt)
-
 end
 
 function love.draw()

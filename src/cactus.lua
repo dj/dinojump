@@ -26,4 +26,8 @@ function Cactus:draw(dt)
     love.graphics.draw(self.img, self.x, self.y)
 end
 
+function Cactus:isTouching(dino)
+    return dino.y > 184 and dino.x > self.x
+end
+
 return Cactus
