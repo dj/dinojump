@@ -11,6 +11,7 @@ function Ground.create(opts)
     newGround.screen = opts.screen
     newGround.y = opts.y
     newGround.lines = {}
+    newGround.speed = opts.speed
 
     for i = 1,30 do
         newGround.lines[i] = {
@@ -34,7 +35,7 @@ function Ground:update(dt)
             }
         else
             -- move the line
-            local dx = 200 * -dt
+            local dx = self.speed * -dt
             self.lines[i] = {
                 x = line.x + dx,
                 y = line.y,

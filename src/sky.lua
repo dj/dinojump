@@ -12,9 +12,9 @@ function Sky.create(opts)
     newSky.screen = opts.screen
     newSky.clouds = {}
 
-    for i = 1,3 do
+    for i = 1,5 do
         newSky.clouds[i] = {
-            x = math.random(0, newSky.screen.w), 
+            x = math.random(0, newSky.screen.w * 2),
             y = math.random(-20, 60),
         }
     end
@@ -41,7 +41,7 @@ function Sky:update(dt)
     end
 end
 
-function Sky:draw(dt)
+function Sky:draw()
     for _, cloud in ipairs(self.clouds) do
         love.graphics.draw(cloudImg, cloud.x, cloud.y)
     end

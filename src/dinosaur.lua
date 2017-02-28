@@ -39,10 +39,10 @@ function Dinosaur:isRunning()
 end
 
 function Dinosaur:update(dt)
-    local jumpSpeed = 30
-    local gravity = -15
+    local jumpSpeed = 15
+    local gravity = -5
     local ground = self.screen.h - 275
-    local jumpMaxHeight = ground - jumpSpeed * 5.5
+    local jumpMaxHeight = ground - jumpSpeed * 6
 
     self.run:update(dt)
 

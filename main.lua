@@ -14,9 +14,11 @@ local BG_RGB = {255, 182, 25}
 local Dinosaur = require 'src/dinosaur'
 local Ground = require 'src/ground'
 local Sky = require 'src/sky'
+local Cactus = require 'src/cactus'
 
 local dino, ground, sky
-
+local cacti = {}
+local score = 0;
 local screen = {
     w = 320,
     h = 480,
@@ -32,26 +34,51 @@ function love.load()
     -- Instantiate the the road and dinosaur
     ground = Ground.create{ 
         screen = screen,
+        speed = 300,
         y = 250
     }
+
     dino = Dinosaur.create{
         screen = screen,
         x = 0,
         y = 200
     }
+
     sky = Sky.create{
         screen = screen,
     }
+
+    for i = 1, 3 do
+        cacti[i] = Cactus.create{
+            screen = screen,
+            speed = 300,
+            x = math.random(0, screen.w * 2),
+            y = 200,
+        }
+    end
+
 end
 
 function love.update(dt)
+    score = score + (dt * 10)
+
     sky:update(dt)
+
+    for _, cactus in ipairs(cacti) do
+        cactus:update(dt)
+    end
+
     ground:update(dt)
     dino:update(dt)
+
 end
 
 function love.draw()
+    love.graphics.print(math.floor(score))
     ground:draw()
+    for _, cactus in ipairs(cacti) do
+        cactus:draw()
+    end
     sky:draw()
     dino:draw()
 end
