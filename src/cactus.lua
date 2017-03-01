@@ -7,7 +7,7 @@ function Cactus.create(args)
     setmetatable(cactus, Cactus)
     cactus.x = args.x
     cactus.y = args.y
-    cactus.screen = args.screen
+    cactus.dimensions = args.dimensions
     cactus.speed = args.speed
     cactus.img = love.graphics.newImage('img/cactus.png')
 
@@ -16,7 +16,7 @@ end
 
 function Cactus:update(dt)
     if (self.x < -100) then
-        self.x = math.random(self.screen.w, self.screen.w * 2)
+        self.x = math.random(self.dimensions.w, self.dimensions.w * 2)
     else
         self.x = self.x - (self.speed * dt)
     end

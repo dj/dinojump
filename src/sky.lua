@@ -9,12 +9,12 @@ function Sky.create(opts)
     setmetatable(newSky, Sky)
 
     -- Instance variables
-    newSky.screen = opts.screen
+    newSky.dimensions = opts.dimensions
     newSky.clouds = {}
 
     for i = 1,5 do
         newSky.clouds[i] = {
-            x = math.random(0, newSky.screen.w * 2),
+            x = math.random(0, newSky.dimensions.w * 2),
             y = math.random(-20, 60),
         }
     end
@@ -27,7 +27,7 @@ function Sky:update(dt)
         if cloud.x < -64 then
             -- cloud has fallen off the left edge, remove it and generate a new cloud
             self.clouds[i] = {
-                x = math.random(self.screen.w, self.screen.w * 2),
+                x = math.random(self.dimensions.w, self.dimensions.w * 2),
                 y = math.random(-20, 60),
             }
         else

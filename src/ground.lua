@@ -8,14 +8,14 @@ function Ground.create(opts)
     setmetatable(newGround, Ground)
 
     -- Instance variables
-    newGround.screen = opts.screen
+    newGround.dimensions = opts.dimensions
     newGround.y = opts.y
     newGround.lines = {}
     newGround.speed = opts.speed
 
     for i = 1,30 do
         newGround.lines[i] = {
-            x = math.random(0, newGround.screen.w * 2), 
+            x = math.random(0, newGround.dimensions.w * 2), 
             y = math.random(newGround.y + 5, newGround.y + 25),
             l = math.random(1,3)
         }
@@ -29,7 +29,7 @@ function Ground:update(dt)
         if line.x < 0 then
             -- line has fallen off the left edge, remove it and generate a new line
             self.lines[i] = {
-                x = math.random(self.screen.w, self.screen.w * 2),
+                x = math.random(self.dimensions.w, self.dimensions.w * 2),
                 y = math.random(self.y + 5, self.y + 25),
                 l = math.random(1,3)
             }

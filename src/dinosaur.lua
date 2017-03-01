@@ -7,7 +7,7 @@ Dinosaur.__index = Dinosaur
 function Dinosaur.create(opts)
     local newDino = {}
     setmetatable(newDino, Dinosaur)
-    newDino.screen = opts.screen
+    newDino.dimensions = opts.dimensions
     newDino.x = opts.x
     newDino.y = opts.y
     newDino.ground = opts.y
@@ -41,7 +41,7 @@ end
 function Dinosaur:update(dt)
     local jumpSpeed = 15
     local gravity = -5
-    local ground = self.screen.h - 275
+    local ground = self.dimensions.h - 275
     local jumpMaxHeight = ground - jumpSpeed * 6
 
     self.run:update(dt)
