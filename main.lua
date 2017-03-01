@@ -48,7 +48,7 @@ function love.load()
         screen = screen,
     }
 
-    for i = 1, 3 do
+    for i = 1, 1 do
         cacti[i] = Cactus.create{
             screen = screen,
             speed = 300,
