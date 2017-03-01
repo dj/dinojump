@@ -27,7 +27,7 @@ function Cactus:draw(dt)
 end
 
 function Cactus:isTouching(dino)
-    return dino.y > 184 and dino.x > self.x
+    return dino.y > 180 and dino.x + 40 > self.x and self.x > -30
 end
 
 return Cactus
