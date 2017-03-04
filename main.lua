@@ -8,11 +8,19 @@
 ]]
 
 local Game = require 'src/screens/game'
-local game
+local Title = require 'src/screens/title'
+
+local game, title, currentScreen
+local started = false
 
 local dimensions = {
     w = 320,
     h = 480,
+}
+
+-- Colors
+local colors = {
+    yellow = {255, 182, 25},
 }
 
 function love.load()
@@ -21,17 +29,34 @@ function love.load()
     -- Seed rng
     math.randomseed(os.time())
 
+    title = Title.create{
+        dimensions = dimensions,
+        colors = colors,
+    }
+
     -- Load game
     game = Game.create{
-        dimensions = dimensions
+        dimensions = dimensions,
+        colors = colors,
     }
-    game:load()
+
+    -- Set the first screen
+    currentScreen = title
+    currentScreen:load()
 end
 
 function love.update(dt)
-    game:update(dt)
+    currentScreen:update(dt)
+
+    -- Start the game
+    if not started and love.keyboard.isDown("space") then
+        started = true
+        currentScreen = nil
+        currentScreen = game
+        currentScreen:load()
+    end
 end
 
 function love.draw()
-    game:draw()
+    currentScreen:draw()
 end

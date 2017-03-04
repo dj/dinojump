@@ -1,4 +1,7 @@
--- Game objects
+-- Game Screen
+local Game = {}
+Game.__index = Game
+
 local Dinosaur = require 'src/dinosaur'
 local Ground = require 'src/ground'
 local Sky = require 'src/sky'
@@ -7,25 +10,18 @@ local Cactus = require 'src/cactus'
 local dino, ground, sky
 local cacti = {}
 
-local score = 0
-
--- Game Screen
-local Game = {}
-Game.__index = Game
-
--- Colors
-local BG_RGB = {255, 182, 25}
-
 function Game.create(args)
     local game = {}
     setmetatable(game, Game)
     game.dimensions = args.dimensions
+    game.score = 0
+    game.colors = args.colors
     return game
 end
 
 function Game:load()
     -- BG Color
-    love.graphics.setBackgroundColor(BG_RGB[1], BG_RGB[2], BG_RGB[3])
+    love.graphics.setBackgroundColor(self.colors.yellow[1], self.colors.yellow[2], self.colors.yellow[3])
 
     -- Instantiate the the road and dinosaur
     ground = Ground.create{
@@ -56,7 +52,7 @@ function Game:load()
 end
 
 function Game:update(dt)
-    score = score + (dt * 10)
+    self.score = self.score + (dt * 10)
 
     sky:update(dt)
 
@@ -74,7 +70,7 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    love.graphics.print(math.floor(score))
+    love.graphics.print(math.floor(self.score))
     ground:draw()
     for _, cactus in ipairs(cacti) do
         cactus:draw()
