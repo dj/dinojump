@@ -21,6 +21,11 @@ function Game.create(args)
         y = game.dimensions.h / 4,
     }
     game.colors = args.colors
+    game.state = 1
+    game.states = {
+        started = 1,
+        done = 2,
+    }
     return game
 end
 
@@ -60,6 +65,10 @@ function Game:load()
 end
 
 function Game:update(dt)
+    if self.state == self.states.over then
+        return
+    end
+
     self.score.value = self.score.value + (dt * 10)
 
     sky:update(dt)
@@ -67,9 +76,11 @@ function Game:update(dt)
     for _, cactus in ipairs(cacti) do
         if cactus:isTouching(dino) then
             print("Touching!")
+            self.state = self.states.over
+            dino:die()
+            return
         else
             cactus:update(dt)
-            print("Miss")
         end
     end
 

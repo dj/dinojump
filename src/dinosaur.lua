@@ -16,6 +16,7 @@ function Dinosaur.create(opts)
         running = 1,
         jumping = 2,
         falling = 3,
+        dead = 4,
     }
     newDino.state = newDino.states.running
 
@@ -23,8 +24,13 @@ function Dinosaur.create(opts)
     local sprite = love.graphics.newImage('img/dino.png')
     local g = anim8.newGrid(frameSize, frameSize, sprite:getWidth(), sprite:getHeight())
     newDino.run = anim8.newAnimation(g('1-2', 1), .15)
+    newDino.dead = anim8.newAnimation(g(5, 1), 1)
     newDino.sprite = sprite
     return newDino
+end
+
+function Dinosaur:die()
+    self.state = self.states.dead
 end
 
 function Dinosaur:isJumping()
@@ -77,7 +83,12 @@ end
 function Dinosaur:draw()
     -- Draw the image in it's original color by setting color to white
     love.graphics.setColor(self.colors.white)
-    self.run:draw(self.sprite, self.x, self.y)
+
+    if self.state == self.states.dead then
+        self.dead:draw(self.sprite, self.x, self.y)
+    else
+        self.run:draw(self.sprite, self.x, self.y)
+    end
 end
 
 return Dinosaur
