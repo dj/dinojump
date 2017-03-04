@@ -10,6 +10,7 @@ function Dinosaur.create(opts)
     newDino.dimensions = opts.dimensions
     newDino.x = opts.x
     newDino.y = opts.y
+    newDino.colors = opts.colors
     newDino.ground = opts.y
     newDino.states = {
         running = 1,
@@ -74,6 +75,8 @@ function Dinosaur:update(dt)
 end
 
 function Dinosaur:draw()
+    -- Draw the image in it's original color by setting color to white
+    love.graphics.setColor(self.colors.white)
     self.run:draw(self.sprite, self.x, self.y)
 end
 

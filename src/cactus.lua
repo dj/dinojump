@@ -8,6 +8,7 @@ function Cactus.create(args)
     cactus.x = args.x
     cactus.y = args.y
     cactus.dimensions = args.dimensions
+    cactus.colors = args.colors
     cactus.speed = args.speed
     cactus.img = love.graphics.newImage('img/cactus.png')
 
@@ -23,6 +24,7 @@ function Cactus:update(dt)
 end
 
 function Cactus:draw(dt)
+    love.graphics.setColor(self.colors.lightGreen)
     love.graphics.draw(self.img, self.x, self.y)
 end
 

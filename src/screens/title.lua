@@ -24,8 +24,13 @@ function Title:update(dt)
 end
 
 function Title:draw()
-    love.graphics.setBackgroundColor(self.colors.yellow[1], self.colors.yellow[2], self.colors.yellow[3])
+    local titleColor = self.colors.yellow
+    local bgColor = self.colors.purple
+    love.graphics.setColor(titleColor)
+    love.graphics.setBackgroundColor(bgColor)
     love.graphics.setFont(font)
+
+    -- Print the title
     love.graphics.print('DINOJUMP', self.text.x, self.text.y)
 end
 

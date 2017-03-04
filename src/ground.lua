@@ -9,6 +9,7 @@ function Ground.create(opts)
 
     -- Instance variables
     newGround.dimensions = opts.dimensions
+    newGround.colors = opts.colors
     newGround.y = opts.y
     newGround.lines = {}
     newGround.speed = opts.speed
@@ -46,6 +47,8 @@ function Ground:update(dt)
 end
 
 function Ground:draw(dt)
+    local lineColor = self.colors.black
+    love.graphics.setColor(lineColor)
     -- This is the ground
     love.graphics.setLineWidth(1)
     love.graphics.line(0,self.y,320,self.y)

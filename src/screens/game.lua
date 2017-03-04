@@ -20,29 +20,32 @@ function Game.create(args)
 end
 
 function Game:load()
-    -- BG Color
-    love.graphics.setBackgroundColor(self.colors.yellow[1], self.colors.yellow[2], self.colors.yellow[3])
+    love.graphics.setBackgroundColor(self.colors.yellow)
 
     -- Instantiate the the road and dinosaur
     ground = Ground.create{
         dimensions = self.dimensions,
+        colors = self.colors,
         speed = 300,
         y = 250
     }
 
     dino = Dinosaur.create{
         dimensions = self.dimensions,
+        colors = self.colors,
         x = 0,
         y = 200
     }
 
     sky = Sky.create{
         dimensions = self.dimensions,
+        colors = self.colors,
     }
 
     for i = 1, 1 do
         cacti[i] = Cactus.create{
             dimensions = self.dimensions,
+            colors = self.colors,
             speed = 300,
             x = math.random(self.dimensions.w, self.dimensions.w * 2),
             y = 200,

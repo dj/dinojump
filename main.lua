@@ -18,9 +18,14 @@ local dimensions = {
     h = 480,
 }
 
--- Colors
 local colors = {
     yellow = {255, 182, 25},
+    violet = {184, 0, 255},
+    purple = {86, 6, 114},
+    lightGreen = {20, 204, 123},
+    darkGreen = {9, 178, 104},
+    black = {25, 25, 25},
+    white = {255, 255, 255}
 }
 
 function love.load()

@@ -11,6 +11,7 @@ function Sky.create(opts)
     -- Instance variables
     newSky.dimensions = opts.dimensions
     newSky.clouds = {}
+    newSky.colors = opts.colors
 
     for i = 1,5 do
         newSky.clouds[i] = {
@@ -42,6 +43,7 @@ function Sky:update(dt)
 end
 
 function Sky:draw()
+    love.graphics.setColor(self.colors.white)
     for _, cloud in ipairs(self.clouds) do
         love.graphics.draw(cloudImg, cloud.x, cloud.y)
     end
