@@ -14,7 +14,12 @@ function Game.create(args)
     local game = {}
     setmetatable(game, Game)
     game.dimensions = args.dimensions
-    game.score = 0
+    game.score = {
+        font = love.graphics.newFont(24),
+        value = 0,
+        x = game.dimensions.w / 2,
+        y = game.dimensions.h / 4,
+    }
     game.colors = args.colors
     return game
 end
@@ -55,7 +60,7 @@ function Game:load()
 end
 
 function Game:update(dt)
-    self.score = self.score + (dt * 10)
+    self.score.value = self.score.value + (dt * 10)
 
     sky:update(dt)
 
@@ -73,7 +78,9 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    love.graphics.print(math.floor(self.score))
+    -- Offset the x position of the score so it looks centered
+    local x = self.score.x - 5 - (self.score.font:getWidth(math.floor(self.score.value)) / 2)
+    love.graphics.print(math.floor(self.score.value), x, self.score.y)
     ground:draw()
     for _, cactus in ipairs(cacti) do
         cactus:draw()
