@@ -15,8 +15,13 @@ function Game.create(args)
     setmetatable(game, Game)
     game.dimensions = args.dimensions
     game.score = {
-        font = love.graphics.newFont(24),
+        font = love.graphics.newFont('fonts/I-pixel-u.ttf', 18),
         value = 0,
+        x = game.dimensions.w,
+        y = 0,
+    }
+    game.gameOver = {
+        font = love.graphics.newFont('fonts/I-pixel-u.ttf', 30),
         x = game.dimensions.w / 2,
         y = game.dimensions.h / 4,
     }
@@ -24,7 +29,7 @@ function Game.create(args)
     game.state = 1
     game.states = {
         started = 1,
-        done = 2,
+        gameOver = 2,
     }
     return game
 end
@@ -65,7 +70,7 @@ function Game:load()
 end
 
 function Game:update(dt)
-    if self.state == self.states.over then
+    if self.state == self.states.gameOver then
         return
     end
 
@@ -76,7 +81,7 @@ function Game:update(dt)
     for _, cactus in ipairs(cacti) do
         if cactus:isTouching(dino) then
             print("Touching!")
-            self.state = self.states.over
+            self.state = self.states.gameOver
             dino:die()
             return
         else
@@ -89,15 +94,33 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    -- Offset the x position of the score so it looks centered
-    local x = self.score.x - 5 - (self.score.font:getWidth(math.floor(self.score.value)) / 2)
-    love.graphics.print(math.floor(self.score.value), x, self.score.y)
     ground:draw()
+
     for _, cactus in ipairs(cacti) do
         cactus:draw()
     end
+
     sky:draw()
+
     dino:draw()
+
+    -- Print text overlay
+    love.graphics.setFont(self.score.font)
+    love.graphics.setColor(self.colors.black)
+
+    -- Print score
+    local x = self.score.x - self.score.font:getWidth(math.floor(self.score.value)) - 5
+    love.graphics.print(math.floor(self.score.value), x, self.score.y)
+
+    -- Print game over
+    if self.state == self.states.gameOver then
+        local x = self.gameOver.x - (self.gameOver.font:getWidth("GAME OVER") / 2)
+        love.graphics.setFont(self.gameOver.font)
+        love.graphics.print("GAME OVER", x, self.gameOver.y)
+
+    end
+
+
 end
 
 return Game
