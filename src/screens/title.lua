@@ -2,8 +2,6 @@
 local Title = {}
 Title.__index = Title
 
-local font
-
 function Title.create(args)
     local title = {}
     setmetatable(title, Title)
@@ -17,7 +15,6 @@ function Title.create(args)
 end
 
 function Title:load()
-    font = love.graphics.newFont('fonts/I-pixel-u.ttf', 40)
 end
 
 function Title:update(dt)
@@ -28,7 +25,6 @@ function Title:draw()
     local bgColor = self.colors.purple
     love.graphics.setColor(titleColor)
     love.graphics.setBackgroundColor(bgColor)
-    love.graphics.setFont(font)
 
     -- Print the title
     love.graphics.print('DINOJUMP', self.text.x, self.text.y)

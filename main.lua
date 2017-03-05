@@ -10,7 +10,7 @@
 local Game = require 'src/screens/game'
 local Title = require 'src/screens/title'
 
-local game, title, currentScreen
+local game, title, currentScreen, font
 local started = false
 
 local dimensions = {
@@ -29,6 +29,8 @@ local colors = {
 }
 
 function love.load()
+    font = love.graphics.newFont('fonts/I-pixel-u.ttf', 40)
+    love.graphics.setFont(font)
     love.window.setMode(dimensions.w, dimensions.h)
 
     -- Seed rng
