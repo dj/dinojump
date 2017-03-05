@@ -62,6 +62,17 @@ function love.update(dt)
         currentScreen = game
         currentScreen:load()
     end
+
+    if currentScreen == game and currentScreen:isOver() and love.keyboard.isDown("r") then
+        currentScreen = nil
+        game = nil
+        game = Game.create{
+            dimensions = dimensions,
+            colors = colors,
+        }
+        currentScreen = game
+        currentScreen:load()
+     end
 end
 
 function love.draw()

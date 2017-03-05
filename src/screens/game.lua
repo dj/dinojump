@@ -30,8 +30,13 @@ function Game.create(args)
     game.states = {
         started = 1,
         gameOver = 2,
+        done = 3,
     }
     return game
+end
+
+function Game:isOver()
+    return self.state == self.states.gameOver
 end
 
 function Game:load()
@@ -117,9 +122,10 @@ function Game:draw()
         local x = self.gameOver.x - (self.gameOver.font:getWidth("GAME OVER") / 2)
         love.graphics.setFont(self.gameOver.font)
         love.graphics.print("GAME OVER", x, self.gameOver.y)
-
+        love.graphics.setFont(self.score.font)
+        x = self.gameOver.x - (self.score.font:getWidth("[press r]") / 2)
+        love.graphics.print("[press r]", x, self.gameOver.y + 50)
     end
-
 
 end
 

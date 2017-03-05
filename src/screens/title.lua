@@ -21,8 +21,8 @@ function Title:update(dt)
 end
 
 function Title:draw()
-    local titleColor = self.colors.yellow
-    local bgColor = self.colors.purple
+    local titleColor = self.colors.black
+    local bgColor = self.colors.yellow
     love.graphics.setColor(titleColor)
     love.graphics.setBackgroundColor(bgColor)
 
