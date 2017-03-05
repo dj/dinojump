@@ -17,7 +17,7 @@ function Title.create(args)
 end
 
 function Title:load()
-    font = love.graphics.newFont('fonts/I-pixel-U.ttf', 40)
+    font = love.graphics.newFont('fonts/I-pixel-u.ttf', 40)
 end
 
 function Title:update(dt)
