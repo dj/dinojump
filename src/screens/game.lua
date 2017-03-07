@@ -5,10 +5,9 @@ Game.__index = Game
 local Dinosaur = require 'src/dinosaur'
 local Ground = require 'src/ground'
 local Sky = require 'src/sky'
-local Cactus = require 'src/cactus'
+local CactiGenerator = require 'src/cacti-generator'
 
-local dino, ground, sky
-local cacti = {}
+local dino, ground, sky, cacti
 
 function Game.create(args)
     local game = {}
@@ -62,15 +61,11 @@ function Game:load()
         colors = self.colors,
     }
 
-    for i = 1, 1 do
-        cacti[i] = Cactus.create{
-            dimensions = self.dimensions,
-            colors = self.colors,
-            speed = 300,
-            x = math.random(self.dimensions.w, self.dimensions.w * 2),
-            y = 200,
-        }
-    end
+    cacti = CactiGenerator.create{
+        dimensions = self.dimensions,
+        colors = self.colors,
+        count = 3,
+    }
 
 end
 
@@ -81,32 +76,20 @@ function Game:update(dt)
 
     self.score.value = self.score.value + (dt * 10)
 
-    sky:update(dt)
-
-    for _, cactus in ipairs(cacti) do
-        if cactus:isTouching(dino) then
-            print("Touching!")
-            self.state = self.states.gameOver
-            dino:die()
-            return
-        else
-            cactus:update(dt)
-        end
+    if cacti.hit then
+        self.state = self.states.gameOver
     end
 
+    cacti:update(dt, dino)
+    sky:update(dt)
     ground:update(dt)
     dino:update(dt)
 end
 
 function Game:draw()
     ground:draw()
-
-    for _, cactus in ipairs(cacti) do
-        cactus:draw()
-    end
-
     sky:draw()
-
+    cacti:draw()
     dino:draw()
 
     -- Print text overlay
