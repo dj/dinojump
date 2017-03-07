@@ -37,8 +37,8 @@ function Cactus:draw(dt)
     love.graphics.draw(self.img, self.x, self.y)
 
     -- debug hitbox
-    local box = self:hitbox()
-    love.graphics.rectangle('line', box.x, box.y, box.width, box.height)
+    -- local box = self:hitbox()
+    -- love.graphics.rectangle('line', box.x, box.y, box.width, box.height)
 end
 
 function Cactus:isTouching(dino)

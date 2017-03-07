@@ -101,8 +101,8 @@ function Dinosaur:draw()
     end
 
     -- debug hitbox
-    local box = self:hitbox()
-    love.graphics.rectangle('line', box.x, box.y, box.width, box.height)
+    -- local box = self:hitbox()
+    -- love.graphics.rectangle('line', box.x, box.y, box.width, box.height)
 
 end
 
