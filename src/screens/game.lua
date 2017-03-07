@@ -76,21 +76,23 @@ function Game:update(dt)
 
     self.score.value = self.score.value + (dt * 10)
 
-    if cacti.hit then
-        self.state = self.states.gameOver
-    end
-
     cacti:update(dt, dino)
     sky:update(dt)
     ground:update(dt)
     dino:update(dt)
+
+    if cacti.hit then
+        self.state = self.states.gameOver
+        dino:die()
+    end
+
 end
 
 function Game:draw()
     ground:draw()
     sky:draw()
-    cacti:draw()
     dino:draw()
+    cacti:draw()
 
     -- Print text overlay
     love.graphics.setFont(self.score.font)

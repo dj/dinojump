@@ -29,7 +29,6 @@ end
 function CactiGenerator:update(dt, dino)
     for _, cactus in ipairs(self.cacti) do
         if cactus:isTouching(dino) then
-            dino:die()
             self.hit = true
         else
             cactus:update(dt)
