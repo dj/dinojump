@@ -10,6 +10,8 @@ function Dinosaur.create(opts)
     newDino.dimensions = opts.dimensions
     newDino.x = opts.x
     newDino.y = opts.y
+    newDino.width = 64
+    newDino.height = 64
     newDino.colors = opts.colors
     newDino.ground = opts.y
     newDino.states = {
@@ -20,17 +22,25 @@ function Dinosaur.create(opts)
     }
     newDino.state = newDino.states.running
 
-    local frameSize = 64
-    local sprite = love.graphics.newImage('img/dino.png')
-    local g = anim8.newGrid(frameSize, frameSize, sprite:getWidth(), sprite:getHeight())
+    local img = love.graphics.newImage('img/dino.png')
+    local g = anim8.newGrid(newDino.width, newDino.height, img:getWidth(), img:getHeight())
     newDino.run = anim8.newAnimation(g('1-2', 1), .15)
     newDino.dead = anim8.newAnimation(g(5, 1), 1)
-    newDino.sprite = sprite
+    newDino.img = img
     return newDino
 end
 
 function Dinosaur:die()
     self.state = self.states.dead
+end
+
+function Dinosaur:hitbox()
+    return {
+        x = self.x + 10,
+        y = self.y + 15,
+        width = 30,
+        height = self.height - 35,
+    }
 end
 
 function Dinosaur:isJumping()
@@ -46,10 +56,10 @@ function Dinosaur:isRunning()
 end
 
 function Dinosaur:update(dt)
-    local jumpSpeed = 15
-    local gravity = -5
+    local jumpSpeed = 21
+    local gravity = -9
     local ground = self.dimensions.h - 275
-    local jumpMaxHeight = ground - jumpSpeed * 6
+    local jumpMaxHeight = ground - jumpSpeed * 12.5
 
     self.run:update(dt)
 
@@ -85,10 +95,15 @@ function Dinosaur:draw()
     love.graphics.setColor(self.colors.white)
 
     if self.state == self.states.dead then
-        self.dead:draw(self.sprite, self.x, self.y)
+        self.dead:draw(self.img, self.x, self.y)
     else
-        self.run:draw(self.sprite, self.x, self.y)
+        self.run:draw(self.img, self.x, self.y)
     end
+
+    -- debug hitbox
+    local box = self:hitbox()
+    love.graphics.rectangle('line', box.x, box.y, box.width, box.height)
+
 end
 
 return Dinosaur
