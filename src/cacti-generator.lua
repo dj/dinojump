@@ -9,18 +9,22 @@ function CactiGenerator.create(args)
     setmetatable(cg, CactiGenerator)
     cg.dimensions = args.dimensions
     cg.colors = args.colors
+    cg.speed = args.speed
     cg.cacti = {}
     cg.count = args.count
     cg.hit = false
+    cg.lastX = 0
+    cg.padding = 150
 
     for i = 1, cg.count do
         cg.cacti[i] = Cactus.create{
             dimensions = cg.dimensions,
             colors = cg.colors,
-            speed = 300,
-            x = math.random(cg.dimensions.w, cg.dimensions.w * 2),
+            speed = cg.speed,
+            x = math.random(cg.lastX + cg.padding, cg.lastX + cg.padding * 1.5),
             y = 200,
         }
+        cg.lastX = cg.cacti[i].x
     end
 
     return cg
@@ -31,7 +35,7 @@ function CactiGenerator:update(dt, dino)
         if cactus:isTouching(dino) then
             self.hit = true
         else
-            cactus:update(dt)
+            cactus:update(dt, self.lastX, self.padding)
         end
     end
 end

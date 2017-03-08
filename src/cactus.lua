@@ -24,9 +24,9 @@ function Cactus:hitbox()
     }
 end
 
-function Cactus:update(dt)
+function Cactus:update(dt, lastX, padding)
     if (self.x < -100) then
-        self.x = math.random(self.dimensions.w, self.dimensions.w * 2)
+        self.x = math.random(lastX + padding, lastX + padding * 1.5)
     else
         self.x = self.x - (self.speed * dt)
     end

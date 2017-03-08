@@ -45,7 +45,7 @@ function Game:load()
     ground = Ground.create{
         dimensions = self.dimensions,
         colors = self.colors,
-        speed = 300,
+        speed = 350,
         y = 250
     }
 
@@ -64,7 +64,8 @@ function Game:load()
     cacti = CactiGenerator.create{
         dimensions = self.dimensions,
         colors = self.colors,
-        count = 3,
+        count = 5,
+        speed = 350,
     }
 
 end
@@ -91,8 +92,8 @@ end
 function Game:draw()
     ground:draw()
     sky:draw()
-    dino:draw()
     cacti:draw()
+    dino:draw()
 
     -- Print text overlay
     love.graphics.setFont(self.score.font)

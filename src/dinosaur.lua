@@ -59,7 +59,7 @@ function Dinosaur:update(dt)
     local jumpSpeed = 21
     local gravity = -9
     local ground = self.dimensions.h - 275
-    local jumpMaxHeight = ground - jumpSpeed * 7.5
+    local jumpMaxHeight = ground - jumpSpeed * 5.5
 
     self.run:update(dt)
 
