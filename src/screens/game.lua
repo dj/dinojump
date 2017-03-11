@@ -8,6 +8,7 @@ local Sky = require 'src/sky'
 local CactiGenerator = require 'src/cacti-generator'
 
 local dino, ground, sky, cacti
+local SPEED = 400
 
 function Game.create(args)
     local game = {}
@@ -45,7 +46,7 @@ function Game:load()
     ground = Ground.create{
         dimensions = self.dimensions,
         colors = self.colors,
-        speed = 350,
+        speed = SPEED,
         y = 250
     }
 
@@ -65,7 +66,7 @@ function Game:load()
         dimensions = self.dimensions,
         colors = self.colors,
         count = 5,
-        speed = 350,
+        speed = SPEED,
     }
 
 end

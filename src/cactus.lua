@@ -26,7 +26,7 @@ end
 
 function Cactus:update(dt, lastX, padding)
     if (self.x < -100) then
-        self.x = math.random(lastX + padding, lastX + padding * 1.5)
+        self.x = math.random(lastX + padding, lastX + padding * 3)
     else
         self.x = self.x - (self.speed * dt)
     end
