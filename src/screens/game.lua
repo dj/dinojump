@@ -20,6 +20,12 @@ function Game.create(args)
         x = game.dimensions.w,
         y = 0,
     }
+    game.highScore = {
+        font = game.score.font,
+        value = args.highScore,
+        x = 5,
+        y = 0,
+    }
     game.gameOver = {
         font = love.graphics.newFont('fonts/I-pixel-u.ttf', 30),
         x = game.dimensions.w / 2,
@@ -101,8 +107,12 @@ function Game:draw()
     love.graphics.setColor(self.colors.black)
 
     -- Print score
-    local x = self.score.x - self.score.font:getWidth(math.floor(self.score.value)) - 5
-    love.graphics.print(math.floor(self.score.value), x, self.score.y)
+    local currentScore = "SCORE: " .. math.floor(self.score.value)
+    local x = self.score.x - self.score.font:getWidth(currentScore) - 5
+    love.graphics.print(currentScore, x, self.score.y)
+
+    -- Print high score
+    love.graphics.print("HIGH: " .. self.highScore.value, self.highScore.x, self.highScore.y)
 
     -- Print game over
     if self.state == self.states.gameOver then
