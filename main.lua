@@ -25,12 +25,11 @@ local colors = {
     lightGreen = {20, 204, 123},
     darkGreen = {9, 178, 104},
     black = {25, 25, 25},
-    white = {255, 255, 255}
+    white = {255, 255, 255},
+    lightBlue = {27, 174, 204},
 }
 
 function love.load()
-    font = love.graphics.newFont('fonts/I-pixel-u.ttf', 40)
-    love.graphics.setFont(font)
     love.window.setMode(dimensions.w, dimensions.h)
 
     -- Seed rng

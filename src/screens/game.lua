@@ -15,7 +15,7 @@ function Game.create(args)
     setmetatable(game, Game)
     game.dimensions = args.dimensions
     game.score = {
-        font = love.graphics.newFont('fonts/I-pixel-u.ttf', 18),
+        font = love.graphics.newFont('fonts/I-pixel-u.ttf', 21),
         value = 0,
         x = game.dimensions.w,
         y = 0,
@@ -40,7 +40,7 @@ function Game:isOver()
 end
 
 function Game:load()
-    love.graphics.setBackgroundColor(self.colors.yellow)
+    love.graphics.setBackgroundColor(self.colors.lightBlue)
 
     -- Instantiate the the road and dinosaur
     ground = Ground.create{

@@ -47,6 +47,10 @@ function Ground:update(dt)
 end
 
 function Ground:draw(dt)
+    local groundColor = self.colors.yellow
+    -- love.graphics.rectangle('fill')
+    love.graphics.setColor(groundColor)
+    love.graphics.rectangle('fill', 0, self.y, self.dimensions.w, self.dimensions.h - self.y)
     local lineColor = self.colors.black
     love.graphics.setColor(lineColor)
     -- This is the ground

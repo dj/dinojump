@@ -21,6 +21,8 @@ function Title:update(dt)
 end
 
 function Title:draw()
+    font = love.graphics.newFont('fonts/I-pixel-u.ttf', 40)
+    love.graphics.setFont(font)
     local titleColor = self.colors.black
     local bgColor = self.colors.yellow
     love.graphics.setColor(titleColor)
