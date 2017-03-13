@@ -34,7 +34,6 @@ function love.load()
     local saveFile = love.filesystem.newFile('save.txt')
     saveFile:open('r')
     local data = saveFile:read()
-    print(data)
 
     highScore = tonumber(data)
 
@@ -59,6 +58,7 @@ function love.load()
 end
 
 function love.update(dt)
+    love.window.setTitle("Dinojump")
     currentScreen:update(dt)
 
     -- Start the game
