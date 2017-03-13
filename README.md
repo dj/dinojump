@@ -2,6 +2,8 @@
 
 A simple game based on the chrome offline dinosaur game.
 
+![](img/dino-jump-progress.gif)
+
 ## Things used
 
 + [Lua 5.2.4](http://www.lua.org/)
