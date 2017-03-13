@@ -120,8 +120,9 @@ function Game:draw()
         love.graphics.setFont(self.gameOver.font)
         love.graphics.print("GAME OVER", x, self.gameOver.y)
         love.graphics.setFont(self.score.font)
-        x = self.gameOver.x - (self.score.font:getWidth("[press r]") / 2)
-        love.graphics.print("[press r]", x, self.gameOver.y + 50)
+        local restart = "PRESS R TO RESTART"
+        x = self.gameOver.x - (self.score.font:getWidth(restart) / 2)
+        love.graphics.print(restart, x, self.gameOver.y + 50)
     end
 
 end
