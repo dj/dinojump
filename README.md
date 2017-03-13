@@ -1,7 +1,18 @@
-# Dinojump (WIP)
+# Dinojump
 
-A simple game inspired by Google Chrome's offline jumping dinosaur game.
+A simple game based on the chrome offline dinosaur game.
 
-Developed with love2d, a lua game framework (https://love2d.org/).
+## Things used
 
-Class implementation based on Programming in Lua chapter 16 (http://www.lua.org/pil/16.1.html).
++ [Lua 5.2.4](http://www.lua.org/)
++ [LÖVE 0.10.2](https://love2d.org/), a lua 2d framework for lua
++ [anim8](https://github.com/kikito/anim8), a sprite animation library for LÖVE
++ [Piskel](http://www.piskelapp.com/), a web app for making sprites
+
+## Run
+```
+love .
+```
+
+## Distribution
+[Wiki](https://love2d.org/wiki/Game_Distribution)
