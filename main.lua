@@ -35,7 +35,11 @@ function love.load()
     saveFile:open('r')
     local data = saveFile:read()
 
-    highScore = tonumber(data)
+    if highScore == nil then
+        highScore = 0
+    else
+        highScore = tonumber(data)
+    end
 
     -- Seed rng
     math.randomseed(os.time())
